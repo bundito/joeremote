@@ -5,7 +5,6 @@ import threading
 import socket
 import asyncio
 import time
-import zmq
 import pika
 
 def move(data):
@@ -21,12 +20,11 @@ def move(data):
                                                                     ))
     channel = connection.channel()
 
-    channel.queue_declare(queue='hello', durable=True)
+    channel.queue_declare(queue='soviet', durable=True)
 
     channel.basic_publish(exchange='',
-                          routing_key='hello',
-                          body='Hello World!')
-    print(" [x] Sent 'Hello World!'")
+                          routing_key='soviet',
+                          body='START')
 
 
     print("After move entry point")
@@ -46,7 +44,7 @@ def move(data):
           #  xmit(line)
             print(line, end='')
             channel.basic_publish(exchange='',
-                                  routing_key='hello',
+                                  routing_key='soviet',
                                   body=line)
 
 

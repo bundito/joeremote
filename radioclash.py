@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import os
 
 import datetime
 
@@ -15,7 +16,7 @@ import cherrypy
 #from ws4py.server.cherrypyserver import WebSocketPlugin, WebSocketTool
 #from ws4py.websocket import WebSocket
 
-
+os.chdir("/home/bundito/joeremote")
 
 cherrypy.config.update({'server.socket_host': '10.0.0.53' } ) # Pub IP
 cherrypy.config.update({'server.socket_port': 9999})
@@ -135,10 +136,11 @@ class StringGenerator(object):
     @cherrypy.expose
     def get_config(self):
         cl.is_valid()
-        import config_app
-        jayson = config_app.read_config()
-        #jayson = jayson.encode('utf-8')
-        return jayson
+        cfg_file = 'joe_app.conf'
+        with open(cfg_file, "r") as f:
+            cfg = f.read()
+            # cfg = str(cfg)
+        return cfg
 
     @cherrypy.expose
     @cherrypy.tools.json_in()

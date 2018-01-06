@@ -167,7 +167,7 @@ def sendquery(parm1="", q=""):
 
 
 
-        proc = subprocess.Popen(["filebot", verb, parm1, q], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc = subprocess.Popen(["/snap/bin/filebot", verb, parm1, q], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     else:
 
